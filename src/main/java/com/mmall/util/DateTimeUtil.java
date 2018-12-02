@@ -14,18 +14,17 @@ public class DateTimeUtil {
 
     //joda-time
 
-    //str->Date
-    //Date->str
     public static final String STANDARD_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 
-
+    //str->Date
     public static Date strToDate(String dateTimeStr,String formatStr){
         DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(formatStr);
         DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);
         return dateTime.toDate();
     }
 
+    //Date->str
     public static String dateToStr(Date date,String formatStr){
         if(date == null){
             return StringUtils.EMPTY;
