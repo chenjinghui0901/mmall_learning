@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by geely
+ * 本地缓存，v2.0使用分布式缓存，解决不同步的问题
  */
 public class TokenCache {
 
