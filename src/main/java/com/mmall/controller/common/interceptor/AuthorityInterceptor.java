@@ -115,7 +115,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("postHandle--controller方法之后前");
+        log.info("postHandle--controller方法之后");
     }
 
     @Override
