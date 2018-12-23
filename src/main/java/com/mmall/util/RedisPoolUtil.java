@@ -1,8 +1,10 @@
 package com.mmall.util;
 
 import com.mmall.common.RedisPool;
+import com.mmall.common.RedisShardedPool;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ShardedJedis;
 
 /**
  * Created by geely
@@ -87,6 +89,38 @@ public class RedisPoolUtil {
             result = jedis.del(key);
         } catch (Exception e) {
             log.error("del key:{} error",key,e);
+            RedisPool.returnBrokenResource(jedis);
+            return result;
+        }
+        RedisPool.returnResource(jedis);
+        return result;
+    }
+
+    public static Long setnx(String key,String value){
+        Jedis jedis = null;
+        Long result = null;
+
+        try {
+            jedis = RedisPool.getJedis();
+            result = jedis.setnx(key,value);
+        } catch (Exception e) {
+            log.error("setnx key:{} value:{} error",key,value,e);
+            RedisPool.returnBrokenResource(jedis);
+            return result;
+        }
+        RedisPool.returnResource(jedis);
+        return result;
+    }
+
+    public static String getSet(String key,String value){
+        Jedis jedis = null;
+        String result = null;
+
+        try {
+            jedis = RedisPool.getJedis();
+            result = jedis.getSet(key,value);
+        } catch (Exception e) {
+            log.error("getset key:{} value:{} error",key,value,e);
             RedisPool.returnBrokenResource(jedis);
             return result;
         }
